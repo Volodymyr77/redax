@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import './App.css';
+import {connect} from 'react-redux';
+import React from 'react';
+
+function App(props) {
+    console.log(props);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <h1 onClick={props.incCounter}>Hello code {props.count}</h1>
+        <h2>aassss</h2>
+       </div>
   );
 }
+const mapStateToProps = (state) => {
 
-export default App;
+    return {count: state.count};
+}
+
+
+const incCounter = (payload) => ({type: "increment", payload});
+const decCounter = () => ({ type: "decrement"});
+
+export default  connect(mapStateToProps, {incCounter, decCounter})(App);
+
